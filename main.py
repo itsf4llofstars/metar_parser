@@ -57,21 +57,35 @@ def read_response_file(filename) -> None:
         print(f"{fnfe}")
     for line in file_lines:
         if re.search(metar_line, line.strip()):
-            line = line.strip()
-            return line[6:-12]
+            return line.strip()[6:-12]
 
 
-if __name__ == "__main__":
-    airport = "kmci"
-    url_address = f"https://www.aviationweather.gov/metar/data?ids={airport}&format=raw&date=&hours=0"
+def strip_remarks(metar) -> str:
+    """Removes the remarks section of the METAR
 
-    url_response = get_response(url_address)
-    utf8_response = url_response.decode("utf-8")
+    Args:
+        metar (str): The metar string
 
-    html_filename = os.path.expanduser(
-        os.path.join("~", "python", "metar_parser", "metar.html")
-    )
+    Returns:
+        metar (str): The metar with the RMK stripped to line end
+    """
+    regex_str = re.compile(r"\sRMK.*")
+    return re.sub(regex_str, "", metar)
 
-    write_response(html_filename, utf8_response)
-    metar_text = read_response_file(html_filename)
-    print(metar_text)
+
+airport = "kmci"
+url_address = (
+    f"https://www.aviationweather.gov/metar/data?ids={airport}&format=raw&date=&hours=0"
+)
+
+url_response = get_response(url_address)
+utf8_response = url_response.decode("utf-8")
+
+html_filename = os.path.expanduser(
+    os.path.join("~", "python", "metar_parser", "metar.html")
+)
+
+write_response(html_filename, utf8_response)
+metar_text = read_response_file(html_filename)
+stripped_metar = strip_remarks(metar_text)
+print(stripped_metar)
