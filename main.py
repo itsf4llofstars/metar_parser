@@ -57,8 +57,36 @@ def read_response_file(filename) -> None:
         print(f"{fnfe}")
     for line in file_lines:
         if re.search(metar_line, line.strip()):
-            line = line.strip()
-            return line[6:-12]
+            return line.strip()[6:-12]
+
+
+def strip_remarks(metar) -> str:
+    """Removes the remarks section of the METAR
+
+    Args:
+        metar (str): The metar string
+
+    Returns:
+        metar (str): The metar with the RMK stripped to line end
+    """
+    regex_str = re.compile(r"\sRMK.*")
+    return re.sub(regex_str, "", metar)
+
+
+def write_metar(filename, metar) -> None:
+    """Writes the single line METAR wx data to a metar
+    text file
+
+    Args:
+        filename (str): Name of the metar text file
+        metar (str): Metar line of text
+    """
+    try:
+        with open(filename, "a") as append:
+            append.write(metar)
+            append.write("\n")
+    except FileNotFoundError as fnfe:
+        print(f"{fnfe}")
 
 
 if __name__ == "__main__":
@@ -74,4 +102,8 @@ if __name__ == "__main__":
 
     write_response(html_filename, utf8_response)
     metar_text = read_response_file(html_filename)
-    print(metar_text)
+    stripped_metar = strip_remarks(metar_text)
+
+    metar_text = os.path.expanduser(os.path.join("~", "logfiles", "metar.txt"))
+
+    write_metar(metar_text, stripped_metar)
