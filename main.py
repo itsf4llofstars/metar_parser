@@ -73,6 +73,22 @@ def strip_remarks(metar) -> str:
     return re.sub(regex_str, "", metar)
 
 
+def write_metar(filename, metar) -> None:
+    """Writes the single line METAR wx data to a metar
+    text file
+
+    Args:
+        filename (str): Name of the metar text file
+        metar (str): Metar line of text
+    """
+    try:
+        with open(filename, "a") as append:
+            append.write(metar)
+            append.write("\n")
+    except FileNotFoundError as fnfe:
+        print(f"{fnfe}")
+
+
 if __name__ == "__main__":
     airport = "kmci"
     url_address = f"https://www.aviationweather.gov/metar/data?ids={airport}&format=raw&date=&hours=0"
