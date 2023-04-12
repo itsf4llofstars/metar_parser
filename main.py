@@ -73,19 +73,18 @@ def strip_remarks(metar) -> str:
     return re.sub(regex_str, "", metar)
 
 
-airport = "kmci"
-url_address = (
-    f"https://www.aviationweather.gov/metar/data?ids={airport}&format=raw&date=&hours=0"
-)
+if __name__ == "__main__":
+    airport = "kmci"
+    url_address = f"https://www.aviationweather.gov/metar/data?ids={airport}&format=raw&date=&hours=0"
 
-url_response = get_response(url_address)
-utf8_response = url_response.decode("utf-8")
+    url_response = get_response(url_address)
+    utf8_response = url_response.decode("utf-8")
 
-html_filename = os.path.expanduser(
-    os.path.join("~", "python", "metar_parser", "metar.html")
-)
+    html_filename = os.path.expanduser(
+        os.path.join("~", "python", "metar_parser", "metar.html")
+    )
 
-write_response(html_filename, utf8_response)
-metar_text = read_response_file(html_filename)
-stripped_metar = strip_remarks(metar_text)
-print(stripped_metar)
+    write_response(html_filename, utf8_response)
+    metar_text = read_response_file(html_filename)
+    stripped_metar = strip_remarks(metar_text)
+    print(stripped_metar)
