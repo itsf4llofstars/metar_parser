@@ -62,7 +62,6 @@ def read_response_file(filename) -> None:
 
 
 if __name__ == "__main__":
-    # url_address = "https://www.python.org"
     airport = "kmci"
     url_address = f"https://www.aviationweather.gov/metar/data?ids={airport}&format=raw&date=&hours=0"
 
