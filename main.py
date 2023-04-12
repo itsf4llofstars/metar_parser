@@ -3,10 +3,11 @@
 Main Python file to parse METAR (aviation weather data) from
 the internet
 """
+import os
 from urllib.request import urlopen
 
 
-def get_response(web_address: str):
+def get_response(web_address: str) -> object:
     """Gets a returned web-site response via the
     urllib module
 
@@ -25,9 +26,28 @@ def get_response(web_address: str):
         return response
 
 
+def write_response(filename: str, response: str) -> None:
+    """Write the utf-8 decoded response text to an html
+    file in the present working directory
+
+    Args:
+        response (str): Utf-8 response text
+    """
+    try:
+        with open(filename, "w") as write:
+            write.write(response)
+            write.write("\n")
+    except FileNotFoundError as fnfe:
+        print(f"{fnfe}")
+
+
 if __name__ == "__main__":
     url_address = "https://www.python.org"
 
     url_response = get_response(url_address)
     utf8_response = url_response.decode("utf-8")
-    print(utf8_response)
+
+    html_filename = os.path.expanduser(
+            os.path.join("~", "python", "metar_parser", "metar.html")
+            )
+    write_response(html_filename, utf8_response)
