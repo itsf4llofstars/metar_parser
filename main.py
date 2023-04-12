@@ -4,6 +4,7 @@ Main Python file to parse METAR (aviation weather data) from
 the internet
 """
 import os
+import re
 from urllib.request import urlopen
 
 
@@ -37,9 +38,26 @@ def write_response(filename: str, response: str) -> None:
     try:
         with open(filename, "w") as write:
             write.write(response)
-            write.write("\n")
     except FileNotFoundError as fnfe:
         print(f"{fnfe}")
+
+
+def read_response_file(filename) -> None:
+    """Reads the html file written from the metar response
+    and returns only the line that contains the metar weather data
+
+    Args:
+        filename (str): Path and name of the metar html file
+    """
+    metar_line = re.compile(r"^<code>")
+    try:
+        with open(filename, "r") as read:
+            file_lines = read.readlines()
+    except FileNotFoundError as fnfe:
+        print(f"{fnfe}")
+    for line in file_lines:
+        if re.search(metar_line, line.strip()):
+            return line.strip()
 
 
 if __name__ == "__main__":
