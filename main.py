@@ -31,6 +31,7 @@ def write_response(filename: str, response: str) -> None:
     file in the present working directory
 
     Args:
+        filename (str): Name of the html file to be written to
         response (str): Utf-8 response text
     """
     try:
@@ -48,6 +49,6 @@ if __name__ == "__main__":
     utf8_response = url_response.decode("utf-8")
 
     html_filename = os.path.expanduser(
-            os.path.join("~", "python", "metar_parser", "metar.html")
-            )
+        os.path.join("~", "python", "metar_parser", "metar.html")
+    )
     write_response(html_filename, utf8_response)
