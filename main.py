@@ -61,7 +61,9 @@ def read_response_file(filename) -> None:
 
 
 if __name__ == "__main__":
-    url_address = "https://www.python.org"
+    # url_address = "https://www.python.org"
+    airport = "kmci"
+    url_address = f"https://www.aviationweather.gov/metar/data?ids={airport}&format=raw&date=&hours=0"
 
     url_response = get_response(url_address)
     utf8_response = url_response.decode("utf-8")
@@ -69,4 +71,7 @@ if __name__ == "__main__":
     html_filename = os.path.expanduser(
         os.path.join("~", "python", "metar_parser", "metar.html")
     )
+
     write_response(html_filename, utf8_response)
+    metar_text = read_response_file(html_filename)
+    print(metar_text)
