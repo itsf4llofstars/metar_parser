@@ -57,7 +57,8 @@ def read_response_file(filename) -> None:
         print(f"{fnfe}")
     for line in file_lines:
         if re.search(metar_line, line.strip()):
-            return line.strip()
+            line = line.strip()
+            return line[6:-12]
 
 
 if __name__ == "__main__":
