@@ -27,3 +27,7 @@ def get_response(web_address: str):
 
 if __name__ == "__main__":
     url_address = "https://www.python.org"
+
+    url_response = get_response(url_address)
+    utf8_response = url_response.decode("utf-8")
+    print(utf8_response)
