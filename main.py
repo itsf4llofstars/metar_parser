@@ -103,4 +103,7 @@ if __name__ == "__main__":
     write_response(html_filename, utf8_response)
     metar_text = read_response_file(html_filename)
     stripped_metar = strip_remarks(metar_text)
-    print(stripped_metar)
+
+    metar_text = os.path.expanduser(os.path.join("~", "logfiles", "metar.txt"))
+
+    write_metar(metar_text, stripped_metar)
