@@ -90,7 +90,7 @@ def write_metar(filename, metar) -> None:
 
 
 if __name__ == "__main__":
-    airport = "kmci"
+    airport = "kaln"
     url_address = f"https://www.aviationweather.gov/metar/data?ids={airport}&format=raw&date=&hours=0"
 
     url_response = get_response(url_address)
