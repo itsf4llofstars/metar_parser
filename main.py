@@ -115,4 +115,4 @@ if __name__ == "__main__":
     )
 
     write_metar(metar_text, stripped_metar)
-    remove_html_file(os.path.join("~", "python", "metar_parser", "metar.html"))
+    remove_html_file(html_filename)
