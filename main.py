@@ -5,6 +5,7 @@ the internet
 """
 import os
 import re
+import shutil
 from urllib.request import urlopen
 
 
@@ -89,6 +90,11 @@ def write_metar(filename, metar) -> None:
         print(f"{fnfe}")
 
 
+def remove_html_file(filename):
+    if os.path.isfile(filename):
+        os.remove(filename)
+
+
 if __name__ == "__main__":
     airport = "kmci"
     url_address = f"https://www.aviationweather.gov/metar/data?ids={airport}&format=raw&date=&hours=0"
@@ -104,6 +110,9 @@ if __name__ == "__main__":
     metar_text = read_response_file(html_filename)
     stripped_metar = strip_remarks(metar_text)
 
-    metar_text = os.path.expanduser(os.path.join("~", "logfiles", "metar.txt"))
+    metar_text = os.path.expanduser(
+        os.path.join("~", "python", "metar_parser", "metar.txt")
+    )
 
     write_metar(metar_text, stripped_metar)
+    remove_html_file(html_filename)
