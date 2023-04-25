@@ -26,7 +26,7 @@ raw_metar = get_metar(
     os.path.expanduser(os.path.join("~", "python", "metar_parser", "metar.txt"))
 )
 
-# KBOS 250354Z 03005KT 10SM BKN008 OVC065 09/07 A3007
+# KBOS 250354Z 03005G21KT 10SM BKN008 OVC065 09/07 A3007
 # 012345678901
 metar = strip_remarks(raw_metar)
 
@@ -49,3 +49,5 @@ elif zulu == 5:
 elif 6 <= zulu <= 23:
     local_hr = zulu - dst
 print(zulu, local_hr)
+
+print(re.search(re.compile(r"\d{5}(G\d{2})?KT"), metar).group())
