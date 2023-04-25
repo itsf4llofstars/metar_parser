@@ -16,6 +16,7 @@ def get_metar(filename):
 
 
 def strip_remarks(metar_text):
+    """Strip off the RMK section of the metar"""
     remark = re.compile(r"\sRMK.*")
     no_remarks = re.sub(remark, "", metar_text)
     return no_remarks
