@@ -36,16 +36,16 @@ station = metar[:4]
 print(station)
 
 day = int(metar[5:7])
-hour = int(metar[7:9])
+zulu = int(metar[7:9])
 minute = int(metar[9:11])
-print(day, hour, minute)
+print(day, zulu, minute)
 
 dst = 5
 local_hr = -1
-if 0 <= hour < 5:
-    local_hr = hour + 24 - dst
-elif hour == 5:
-    local_hr = hour - dst
-elif 6 <= hour <= 23:
-    local_hr = hour - dst
-print(hour, local_hr)
+if 0 <= zulu < 5:
+    local_hr = zulu + 24 - dst
+elif zulu == 5:
+    local_hr = zulu - dst
+elif 6 <= zulu <= 23:
+    local_hr = zulu - dst
+print(zulu, local_hr)
