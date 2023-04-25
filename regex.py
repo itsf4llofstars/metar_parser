@@ -15,6 +15,16 @@ def get_metar(filename):
             return metar_list[-1].strip()
 
 
-metar = get_metar(
+def strip_remarks(metar_text):
+    remark = re.compile(r"\sRMK.*")
+    no_remarks = re.sub(remark, "", metar_text)
+    return no_remarks
+
+
+raw_metar = get_metar(
     os.path.expanduser(os.path.join("~", "python", "metar_parser", "metar.txt"))
 )
+
+metar = strip_remarks(raw_metar)
+
+print(metar)
