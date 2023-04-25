@@ -42,13 +42,10 @@ print(day, hour, minute)
 
 dst = 5
 local_hr = -1
-hour = 0
-while hour < 25:
-    if 0 <= hour < 5:
-        local_hr = hour + 24 - dst
-    elif hour == 5:
-        local_hr = hour - dst
-    elif 6 <= hour <= 23:
-        local_hr = hour - dst
-    print(hour, local_hr)
-    hour += 1
+if 0 <= hour < 5:
+    local_hr = hour + 24 - dst
+elif hour == 5:
+    local_hr = hour - dst
+elif 6 <= hour <= 23:
+    local_hr = hour - dst
+print(hour, local_hr)
