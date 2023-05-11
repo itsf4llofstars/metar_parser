@@ -69,6 +69,9 @@ def main():
         dew = temps.group()[4:6]
     print(temp, dew)
 
+    alt = re.search(r"\sA\d{4}$", metar).group()[1:]
+    print(alt)
+
 
 if __name__ == "__main__":
     main()
