@@ -96,7 +96,7 @@ def remove_html_file(filename):
 
 
 if __name__ == "__main__":
-    airport = ""
+    airport = "kaln"
     url_address = f"https://www.aviationweather.gov/metar/data?ids={airport}&format=raw&date=&hours=0"
 
     url_response = get_response(url_address)

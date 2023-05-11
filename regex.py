@@ -6,7 +6,7 @@ import os
 def get_metar(filename):
     """Get the latest metar from metar.txt"""
     try:
-        with open(filename, "r") as read:
+        with open(filename) as read:
             metar_list = read.readlines()
     except FileNotFoundError as fnfe:
         print(f"{fnfe}")
