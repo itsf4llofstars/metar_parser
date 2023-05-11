@@ -59,7 +59,15 @@ def main():
         local_hr = zulu - dst
     print(zulu, local_hr)
 
-    print(re.search(re.compile(r"\d{5}(G\d{2})?KT"), metar).group())
+    # print(re.search(re.compile(r"\d{5}(G\d{2})?KT"), metar).group())
+
+    # handle minus temps Mxx/Mxx xx/Mxx
+    temp, dew = 0, 0
+    temps = re.search(r"\sM?\d{2}\/M?\d{2}\s", metar)
+    if "M" not in temps.group():
+        temp = temps.group()[1:3]
+        dew = temps.group()[4:6]
+    print(temp, dew)
 
 
 if __name__ == "__main__":
