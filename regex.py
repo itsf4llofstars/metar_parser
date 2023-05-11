@@ -31,19 +31,23 @@ def main():
         os.path.expanduser(os.path.join("~", "python", "metar_parser", "metar.txt"))
     )
 
-# KBOS 250354Z 03005G21KT 10SM BKN008 OVC065 09/07 A3007
-# 012345678901
-    metar = strip_remarks(raw_metar)
+    # metar = "KBOS 250354Z 03005G21KT 10SM BKN008 OVC065 09/07 A3007"
+    metar = "KALN 071850Z 26010KT 7SM +TSRA SCT030 OVC040 26/20 A2989"
+    # metar = "KALN 101250Z 09006KT 10SM -RA SCT047 OVC085 16/12 A3014"
+    # metar = "012345678901
+    # metar = strip_remarks(raw_metar)
+
+    if "SCT" in metar:
+        sct = re.compile(r"\s\w{3}\d{3}\s")
+        print(re.search(sct, metar).group())
 
     print(metar)
 
     station = metar[:4]
-    print(station)
 
     day = int(metar[5:7])
     zulu = int(metar[7:9])
     minute = int(metar[9:11])
-    print(day, zulu, minute)
 
     dst = 5
     local_hr = -1
