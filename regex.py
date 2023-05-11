@@ -32,16 +32,14 @@ def main():
     )
 
     # metar = "KBOS 250354Z 03005G21KT 10SM BKN008 OVC065 09/07 A3007"
-    metar = "KALN 071850Z 26010KT 7SM +TSRA SCT030 OVC040 26/20 A2989"
+    # metar = "KALN 071850Z 26010KT 7SM +TSRA SCT030 OVC040 26/20 A2989"
     # metar = "KALN 101250Z 09006KT 10SM -RA SCT047 OVC085 16/12 A3014"
     # metar = "012345678901
-    # metar = strip_remarks(raw_metar)
+    metar = strip_remarks(raw_metar)
 
+    sct = ""
     if "SCT" in metar:
         sct = re.compile(r"\s\w{3}\d{3}\s")
-        print(re.search(sct, metar).group())
-
-    print(metar)
 
     station = metar[:4]
 
@@ -57,7 +55,6 @@ def main():
         local_hr = zulu - dst
     elif 6 <= zulu <= 23:
         local_hr = zulu - dst
-    print(zulu, local_hr)
 
     # print(re.search(re.compile(r"\d{5}(G\d{2})?KT"), metar).group())
 
@@ -67,9 +64,14 @@ def main():
     if "M" not in temps.group():
         temp = temps.group()[1:3]
         dew = temps.group()[4:6]
-    print(temp, dew)
 
     alt = re.search(r"\sA\d{4}$", metar).group()[1:]
+
+    # prints
+    print(metar)
+    print(station)
+    print(f"{day = } {zulu = } {local_hr = } {minute = }")
+    print(temp, dew)
     print(alt)
 
 
