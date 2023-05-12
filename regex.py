@@ -26,6 +26,18 @@ def strip_remarks(metar_text):
     return no_remarks
 
 
+def convert_temp(temp) -> int:
+    """Converts a Celcius temp ot Farenheight
+
+    Args:
+        temp (int): Temperature Celcius
+
+    Returns:
+        int: Temperature Farenheight
+    """
+    return int((1.8 * temp) + 32)
+
+
 def main():
     raw_metar = get_metar(
         os.path.expanduser(os.path.join("~", "python", "metar_parser", "metar.txt"))
@@ -59,11 +71,13 @@ def main():
     # print(re.search(re.compile(r"\d{5}(G\d{2})?KT"), metar).group())
 
     # handle minus temps Mxx/Mxx xx/Mxx
-    temp, dew = 0, 0
+    c_temp, c_dew = 0, 0
     temps = re.search(r"\sM?\d{2}\/M?\d{2}\s", metar)
     if "M" not in temps.group():
         temp = temps.group()[1:3]
         dew = temps.group()[4:6]
+
+    convert_temp(c_temp)
 
     alt = re.search(r"\sA\d{4}$", metar).group()[1:]
 
