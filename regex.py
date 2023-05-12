@@ -27,6 +27,15 @@ def strip_remarks(metar_text):
 
 
 def convert_utc(zulu, utc=5):
+    """Convert utc time to local dst time
+
+    Args:
+        zulu (int): ZULU hour
+        utc (int, optional): UTC offset. Defaults to 5.
+
+    Returns:
+        int: Current local hour
+    """
     utc = 5
     local = -1
     if 0 <= zulu < 5:
