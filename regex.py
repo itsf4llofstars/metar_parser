@@ -51,15 +51,23 @@ def convert_temp(temp) -> int:
     return int((1.8 * float(temp)) + 32)
 
 
+def get_altimeter(curr_metar):
+    """Get altimeter setting
+
+    Args:
+        curr_metar (int): The last metar
+
+    Returns:
+        (str): The curent altimeter setting
+    """
+    return re.search(r"\sA\d{4}$", curr_metar).group()[1:].strip()
+
+
 def main():
     raw_metar = get_metar(
         os.path.expanduser(os.path.join("~", "python", "metar_parser", "metar.txt"))
     )
 
-    # metar = "KBOS 250354Z 03005G21KT 10SM BKN008 OVC065 09/07 A3007"
-    # metar = "KALN 071850Z 26010KT 7SM +TSRA SCT030 OVC040 26/20 A2989"
-    # metar = "KALN 101250Z 09006KT 10SM -RA SCT047 OVC085 16/12 A3014"
-    # metar = "012345678901
     metar = strip_remarks(raw_metar)
 
     # TODO: Sky Conditions
@@ -72,6 +80,7 @@ def main():
 
     local_hr = convert_utc(zulu_hr)
 
+    # Gusty winds
     # print(re.search(re.compile(r"\d{5}(G\d{2})?KT"), metar).group())
 
     # handle minus temps Mxx/Mxx xx/Mxx
@@ -84,7 +93,7 @@ def main():
     temp_f = convert_temp(c_temp)
     dew_f = convert_temp(c_dew)
 
-    alt = re.search(r"\sA\d{4}$", metar).group()[1:]
+    alt = get_altimeter(metar)
 
     # prints
     print(metar)
@@ -96,3 +105,8 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# metar = "KBOS 250354Z 03005G21KT 10SM BKN008 OVC065 09/07 A3007"
+# metar = "KALN 071850Z 26010KT 7SM +TSRA SCT030 OVC040 26/20 A2989"
+# metar = "KALN 101250Z 09006KT 10SM -RA SCT047 OVC085 16/12 A3014"
+# metar = "012345678901
