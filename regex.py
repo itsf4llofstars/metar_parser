@@ -1,4 +1,4 @@
-"""reges.py"""
+"""regex.py"""
 import re
 import os
 
