@@ -90,10 +90,10 @@ def main():
 
     local_hr = convert_utc(zulu_hr)
 
-    # Gusty winds
+    # TODO: Gusty winds
     # print(re.search(re.compile(r"\d{5}(G\d{2})?KT"), metar).group())
 
-    # handle minus temps Mxx/Mxx xx/Mxx
+    # TODO: handle minus temps Mxx/Mxx xx/Mxx
     c_temp, c_dew = 0, 0
     temps = re.search(r"\sM?\d{2}\/M?\d{2}\s", metar)
     if "M" not in temps.group():
