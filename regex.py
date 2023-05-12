@@ -97,10 +97,9 @@ def main():
 
     # prints
     print(metar)
-    print(station)
-    print(f"{day = } {zulu_hr = } {local_hr = } {minute = }")
-    print(temp_f, dew_f)
-    print(alt)
+    print(f"DAY {day}\n{local_hr}{minute} LCL")
+    print(f"{temp_f} F, {dew_f} F")
+    print(f"{alt} BARO")
 
 
 if __name__ == "__main__":
