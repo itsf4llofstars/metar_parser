@@ -70,6 +70,7 @@ def main():
     zulu_hr = int(metar[7:9])
     minute = int(metar[9:11])
 
+    local_hr = convert_utc(zulu_hr)
 
     # print(re.search(re.compile(r"\d{5}(G\d{2})?KT"), metar).group())
 
@@ -88,7 +89,7 @@ def main():
     # prints
     print(metar)
     print(station)
-    print(f"{day = } {zulu = } {local = } {minute = }")
+    print(f"{day = } {zulu_hr = } {local_hr = } {minute = }")
     print(temp_f, dew_f)
     print(alt)
 
