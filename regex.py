@@ -35,7 +35,7 @@ def convert_temp(temp) -> int:
     Returns:
         int: Temperature Farenheight
     """
-    return int((1.8 * temp) + 32)
+    return int((1.8 * float(temp)) + 32)
 
 
 def main():
@@ -74,10 +74,11 @@ def main():
     c_temp, c_dew = 0, 0
     temps = re.search(r"\sM?\d{2}\/M?\d{2}\s", metar)
     if "M" not in temps.group():
-        temp = temps.group()[1:3]
-        dew = temps.group()[4:6]
+        c_temp = temps.group()[1:3]
+        c_dew = temps.group()[4:6]
 
-    convert_temp(c_temp)
+    temp_f = convert_temp(c_temp)
+    dew_f = convert_temp(c_dew)
 
     alt = re.search(r"\sA\d{4}$", metar).group()[1:]
 
@@ -85,7 +86,7 @@ def main():
     print(metar)
     print(station)
     print(f"{day = } {zulu = } {local_hr = } {minute = }")
-    print(temp, dew)
+    print(temp_f, dew_f)
     print(alt)
 
 
