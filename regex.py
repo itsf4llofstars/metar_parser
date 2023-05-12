@@ -44,6 +44,7 @@ def convert_utc(zulu, utc=5):
         local = zulu - utc
     elif 6 <= zulu <= 23:
         local = zulu - utc
+
     if 0 < local < 24:
         return local
 
