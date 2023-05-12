@@ -49,9 +49,7 @@ def main():
     # metar = "012345678901
     metar = strip_remarks(raw_metar)
 
-    sct = ""
-    if "SCT" in metar:
-        sct = re.compile(r"\s\w{3}\d{3}\s")
+    # TODO: Sky Conditions
 
     station = metar[:4]
 
