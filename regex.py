@@ -26,6 +26,19 @@ def strip_remarks(metar_text):
     return no_remarks
 
 
+def convert_utc(zulu, utc=5):
+    utc = 5
+    local = -1
+    if 0 <= zulu < 5:
+        local = zulu + 24 - utc
+    elif zulu == 5:
+        local = zulu - utc
+    elif 6 <= zulu <= 23:
+        local = zulu - utc
+    if 0 < local < 24:
+        return local
+
+
 def convert_temp(temp) -> int:
     """Converts a Celcius temp ot Farenheight
 
@@ -54,17 +67,9 @@ def main():
     station = metar[:4]
 
     day = int(metar[5:7])
-    zulu = int(metar[7:9])
+    zulu_hr = int(metar[7:9])
     minute = int(metar[9:11])
 
-    dst = 5
-    local_hr = -1
-    if 0 <= zulu < 5:
-        local_hr = zulu + 24 - dst
-    elif zulu == 5:
-        local_hr = zulu - dst
-    elif 6 <= zulu <= 23:
-        local_hr = zulu - dst
 
     # print(re.search(re.compile(r"\d{5}(G\d{2})?KT"), metar).group())
 
@@ -83,7 +88,7 @@ def main():
     # prints
     print(metar)
     print(station)
-    print(f"{day = } {zulu = } {local_hr = } {minute = }")
+    print(f"{day = } {zulu = } {local = } {minute = }")
     print(temp_f, dew_f)
     print(alt)
 
