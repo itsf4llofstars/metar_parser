@@ -41,6 +41,8 @@ def write_response(filename: str, response: str) -> None:
             write.write(response)
     except FileNotFoundError as fnfe:
         print(f"{fnfe}")
+    except Exception as err:
+        print(f"{err}")
 
 
 def read_response_file(filename) -> None:
