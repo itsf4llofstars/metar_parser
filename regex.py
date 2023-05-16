@@ -50,7 +50,7 @@ def convert_utc(zulu, utc=5):
 
 
 def convert_temp(temp) -> int:
-    """Converts a Celcius temp ot Farenheight
+    """Converts a Celcius temp to Farenheight
 
     Args:
         temp (int): Temperature Celcius
@@ -75,8 +75,8 @@ def get_altimeter(curr_metar):
 
 def main():
     raw_metar = get_metar(
-        os.path.expanduser(os.path.join("~", "python", "metar_parser", "metar.txt"))
-    )
+            os.path.expanduser(os.path.join("~", "python", "metar_parser", "metar.txt"))
+            )
 
     metar = strip_remarks(raw_metar)
 
