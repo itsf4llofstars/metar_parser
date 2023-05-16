@@ -9,7 +9,7 @@ import shutil
 from urllib.request import urlopen
 
 
-def get_response(web_address: str) -> object:
+def get_response(web_address: str):
     """Gets a returned web-site response via the
     urllib module
 
@@ -111,8 +111,8 @@ if __name__ == "__main__":
     stripped_metar = strip_remarks(metar_text)
 
     metar_text = os.path.expanduser(
-        os.path.join("~", "python", "metar_parser", "metar.txt")
-    )
+            os.path.join("~", "python", "metar_parser", "metar.txt")
+            )
 
     write_metar(metar_text, stripped_metar)
     remove_html_file(html_filename)
