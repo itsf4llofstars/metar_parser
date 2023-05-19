@@ -79,6 +79,10 @@ def main():
     )
 
     metar = strip_remarks(raw_metar)
+    # metar = "KORD 071850Z 26010KT 7SM +TSRA SCT030 26/20 A2989"
+    # metar = "KBOS 250354Z 03005G21KT 10SM BKN008 OVC065 09/07 A3007"
+    # metar = "KORD 101250Z 09006KT 10SM -RA SCT047 BKN085 16/12 A3014"
+    # metar = "012345678901
 
     station = metar[:4]
 
@@ -131,8 +135,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-# metar = "KBOS 250354Z 03005G21KT 10SM BKN008 OVC065 09/07 A3007"
-# metar = "KORD 071850Z 26010KT 7SM +TSRA SCT030 OVC040 26/20 A2989"
-# metar = "KORD 101250Z 09006KT 10SM -RA SCT047 OVC085 16/12 A3014"
-# metar = "012345678901
