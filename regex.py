@@ -75,12 +75,14 @@ def get_altimeter(curr_metar):
 
 def main():
     raw_metar = get_metar(
-            os.path.expanduser(os.path.join("~", "python", "metar_parser", "metar.txt"))
-            )
+        os.path.expanduser(os.path.join("~", "python", "metar_parser", "metar.txt"))
+    )
 
     metar = strip_remarks(raw_metar)
-
-    # TODO: Sky Conditions
+    # metar = "KORD 071850Z 26010KT 7SM +TSRA SCT030 26/20 A2989"
+    # metar = "KBOS 250354Z 03005G21KT 10SM BKN008 OVC065 09/07 A3007"
+    # metar = "KORD 101250Z 09006KT 10SM -RA SCT047 BKN085 16/12 A3014"
+    # metar = "012345678901
 
     station = metar[:4]
 
@@ -92,6 +94,23 @@ def main():
 
     # TODO: Gusty winds
     # print(re.search(re.compile(r"\d{5}(G\d{2})?KT"), metar).group())
+
+    # TODO: Sky Conditions CLR, SCT, BKN, OVC
+    clear = r"CLR"
+    scattered = r"SCT"
+    broken = r"BKN"
+    overcast = r"OVC"
+    sky = None
+    if re.search(clear, metar):
+        sky = "CLEAR"
+    elif re.search(overcast, metar):
+        sky = "OVERCAST"
+    elif re.search(broken, metar):
+        sky = "BROKEN"
+    elif re.search(scattered, metar):
+        sky = "SCATTERED"
+    else:
+        sky = "CLEAR"
 
     # TODO: handle minus temps Mxx/Mxx xx/Mxx
     c_temp, c_dew = 0, 0
@@ -109,14 +128,10 @@ def main():
     print(station)
     print(metar)
     print(f"DAY {day}\n{local_hr}{minute} LCL")
+    print(f"Sky Conditions: {sky}")
     print(f"{temp_f} F, {dew_f} F")
     print(f"{alt} BARO")
 
 
 if __name__ == "__main__":
     main()
-
-# metar = "KBOS 250354Z 03005G21KT 10SM BKN008 OVC065 09/07 A3007"
-# metar = "KORD 071850Z 26010KT 7SM +TSRA SCT030 OVC040 26/20 A2989"
-# metar = "KORD 101250Z 09006KT 10SM -RA SCT047 OVC085 16/12 A3014"
-# metar = "012345678901
