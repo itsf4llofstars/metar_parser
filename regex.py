@@ -125,9 +125,8 @@ def main():
     alt = get_altimeter(metar)
 
     # prints
-    print(station)
     print(metar)
-    print(f"DAY {day}\n{local_hr}{minute} LCL")
+    print(f"DAY: {day}\n{local_hr}{minute} LCL")
     print(f"Sky Conditions: {sky}")
     print(f"{temp_f} F, {dew_f} F")
     print(f"{alt} BARO")
