@@ -91,6 +91,23 @@ def main():
     # TODO: Gusty winds
     # print(re.search(re.compile(r"\d{5}(G\d{2})?KT"), metar).group())
 
+    # TODO: Sky Conditions CLR, SCT, BKN, OVC
+    clear = r"CLR"
+    scattered = r"SCT"
+    broken = r"BKN"
+    overcast = r"OVC"
+    sky = None
+    if re.search(clear, metar):
+        sky = "CLEAR"
+    elif re.search(overcast, metar):
+        sky = "OVERCAST"
+    elif re.search(broken, metar):
+        sky = "BROKEN"
+    elif re.search(scattered, metar):
+        sky = "SCATTERED"
+    else:
+        sky = "CLEAR"
+
     # TODO: handle minus temps Mxx/Mxx xx/Mxx
     c_temp, c_dew = 0, 0
     temps = re.search(r"\sM?\d{2}\/M?\d{2}\s", metar)
