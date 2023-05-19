@@ -75,12 +75,10 @@ def get_altimeter(curr_metar):
 
 def main():
     raw_metar = get_metar(
-            os.path.expanduser(os.path.join("~", "python", "metar_parser", "metar.txt"))
-            )
+        os.path.expanduser(os.path.join("~", "python", "metar_parser", "metar.txt"))
+    )
 
     metar = strip_remarks(raw_metar)
-
-    # TODO: Sky Conditions
 
     station = metar[:4]
 
