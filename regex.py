@@ -125,11 +125,13 @@ def main():
     alt = get_altimeter(metar)
 
     # prints
-    print(metar)
-    print(f"DAY: {day}\n{local_hr}{minute} LCL")
-    print(f"Sky Conditions: {sky}")
-    print(f"{temp_f} F, {dew_f} F")
-    print(f"{alt} BARO")
+    print()
+    print("\t" + metar)
+    print(f"\tDay: {day}")
+    print(f"\t{local_hr}{minute} LCL")
+    print(f"\tSky Conditions: {sky}")
+    print(f"\tTemp: {temp_f} F, Dew Point: {dew_f} F")
+    print(f"\tBarameter: {alt}")
 
 
 if __name__ == "__main__":
