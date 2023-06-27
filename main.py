@@ -36,7 +36,7 @@ def write_response(filename: str, response: str) -> None:
         response (str): Utf-8 response text
     """
     try:
-        with open(filename, "w") as write:
+        with open(filename, "w", encoding="utf-8") as write:
             write.write(response)
     except FileNotFoundError as fnfe:
         print(f"{fnfe}")
@@ -51,13 +51,14 @@ def read_response_file(filename) -> None:
     """
     metar_line = re.compile(r"^<code>")
     try:
-        with open(filename, "r") as read:
+        with open(filename, "r", encoding="utf-8") as read:
             file_lines = read.readlines()
     except FileNotFoundError as fnfe:
         print(f"{fnfe}")
     for line in file_lines:
         if re.search(metar_line, line.strip()):
             return line.strip()[6:-12]
+    return None
 
 
 def strip_remarks(metar) -> str:
@@ -82,7 +83,7 @@ def write_metar(filename, metar) -> None:
         metar (str): Metar line of text
     """
     try:
-        with open(filename, "a") as append:
+        with open(filename, "a", encoding="utf-8") as append:
             append.write(metar)
             append.write("\n")
     except FileNotFoundError as fnfe:
