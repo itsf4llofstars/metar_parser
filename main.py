@@ -18,13 +18,13 @@ def get_response(web_address: str) -> object:
     Return:
         response (str): Response from the polled web-site
     """
-    try:
-        with urlopen(web_address) as resp:
-            response = resp.read()
-    except Exception as err:
-        print(f"{err}")
-    else:
+
+    response = ""
+    with urlopen(web_address) as resp:
+        response = resp.read()
+    if response:
         return response
+    return None
 
 
 def write_response(filename: str, response: str) -> None:
